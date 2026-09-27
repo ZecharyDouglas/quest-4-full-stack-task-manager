@@ -26,6 +26,7 @@ export default function TaskForm() {
         <select
           name="Task Priorities"
           id=""
+          value={taskPriority}
           onChange={(e) => {
             setTaskPriority(e.target.value);
           }}
