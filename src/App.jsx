@@ -8,7 +8,8 @@ export default function App() {
   // TODO 1: Replace this temporary value with React state.
   // TODO 2: Write handleAddTask(taskData) without mutating the old array.
   // TODO 3: Later, write handleToggleTask(id)...
-  const tasks = starterTasks;
+  //const tasks = starterTasks;
+  const [tasks, setTasks] = useState(starterTasks);
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl p-6 md:p-10">

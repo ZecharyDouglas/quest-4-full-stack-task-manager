@@ -6,6 +6,17 @@ export default function TaskForm() {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskPriority, setTaskPriority] = useState("medium");
   const [taskCompleted, setTaskCompleted] = useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const taskObject = {
+      task_title: taskTitle,
+      task_priority: taskPriority,
+      task_completed: taskCompleted,
+    };
+    setTaskTitle("");
+    setTaskPriority("medium");
+    setTaskCompleted(false);
+  };
 
   return (
     <form className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
@@ -36,6 +47,14 @@ export default function TaskForm() {
           <option value="high">High</option>
           <option value="urgent">Urgent</option>
         </select>
+        <div>
+          <button
+            className="flex flex-row bg-green p-2 border border-white rounded-lg"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </form>
   );
