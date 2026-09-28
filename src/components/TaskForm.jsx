@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function TaskForm() {
+export default function TaskForm({ onAddTask }) {
   // TODO: controlled React form: title + priority(low/medium/high/urgent) + submit.
   // Do NOT use document.getElementById/querySelector.
   const [taskTitle, setTaskTitle] = useState("");
@@ -9,10 +9,11 @@ export default function TaskForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const taskObject = {
-      task_title: taskTitle,
-      task_priority: taskPriority,
-      task_completed: taskCompleted,
+      title: taskTitle,
+      priority: taskPriority,
+      completed: taskCompleted,
     };
+    onAddTask(taskObject);
     setTaskTitle("");
     setTaskPriority("medium");
     setTaskCompleted(false);

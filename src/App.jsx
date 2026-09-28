@@ -10,6 +10,18 @@ export default function App() {
   // TODO 3: Later, write handleToggleTask(id)...
   //const tasks = starterTasks;
   const [tasks, setTasks] = useState(starterTasks);
+  const handleAddTask = (t) => {
+    setTasks((currentTasks) => {
+      const id =
+        currentTasks.length == 0
+          ? 1
+          : Math.max(...currentTasks.map((t) => t.id)) + 1;
+      const newTask = { id, ...t };
+      return [...currentTasks, newTask];
+    });
+    console.log(tasks);
+  };
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl p-6 md:p-10">
@@ -24,7 +36,7 @@ export default function App() {
         </header>
         <TaskStats tasks={tasks} />
         <section className="mt-8 grid gap-6 md:grid-cols-[.8fr_1.2fr]">
-          <TaskForm />
+          <TaskForm onAddTask={handleAddTask} />
           <TaskList tasks={tasks} />
         </section>
       </div>
