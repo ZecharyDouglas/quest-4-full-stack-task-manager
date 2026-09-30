@@ -1,5 +1,5 @@
 import TaskCard from "./TaskCard.jsx";
-export default function TaskList({ tasks }) {
+export default function TaskList({ tasks, onToggleTask }) {
   // TODO: render one TaskCard per task with a stable key.
   // TODO: if tasks is empty, render text containing "No tasks".
   return (
@@ -12,7 +12,9 @@ export default function TaskList({ tasks }) {
             <>`No tasks`</>
           ) : (
             tasks.map((t) => {
-              return <TaskCard task={t} key={t.id} />;
+              return (
+                <TaskCard task={t} key={t.id} onToggleTask={onToggleTask} />
+              );
             })
           )
         }

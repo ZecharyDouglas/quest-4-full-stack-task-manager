@@ -21,6 +21,23 @@ export default function App() {
     });
     console.log(tasks);
   };
+  const handleToggleTask = (id) => {
+    setTasks((prev) => {
+      const toggle_updated = [
+        ...prev.map((t) => {
+          if (t.id === id) {
+            return {
+              ...t,
+              completed: !t.completed,
+            };
+          }
+          return { ...t };
+        }),
+      ];
+      //console.log(toggle_updated);
+      return toggle_updated;
+    });
+  };
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">
@@ -37,7 +54,7 @@ export default function App() {
         <TaskStats tasks={tasks} />
         <section className="mt-8 grid gap-6 md:grid-cols-[.8fr_1.2fr]">
           <TaskForm onAddTask={handleAddTask} />
-          <TaskList tasks={tasks} />
+          <TaskList tasks={tasks} onToggleTask={handleToggleTask} />
         </section>
       </div>
     </main>
