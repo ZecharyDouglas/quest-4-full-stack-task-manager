@@ -31,7 +31,7 @@ export default function App() {
               completed: !t.completed,
             };
           }
-          return { ...t };
+          return t;
         }),
       ];
       //console.log(toggle_updated);
