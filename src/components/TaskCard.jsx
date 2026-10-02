@@ -7,13 +7,13 @@ export default function TaskCard({ task, onToggleTask }) {
       priority_color = `text-slate-100/40`;
       break;
     case "medium":
-      priority_color = `text-orange-400/60`;
+      priority_color = `text-orange-400/40`;
       break;
     case "high":
-      priority_color = `text-orange-500/60`;
+      priority_color = `text-orange-500/40`;
       break;
     case "urgent":
-      priority_color = `text-red-500/60`;
+      priority_color = `text-red-500/40`;
       break;
 
     default:
@@ -40,7 +40,7 @@ export default function TaskCard({ task, onToggleTask }) {
       {
         /* TODO */
         <>
-          <div className="">
+          <div className=" flex justify-between items-baseline mb-2">
             <h1
               className={` text-lg text-slate-100 ${task.completed ? "line-through text-slate-100/80" : ""}`}
             >
@@ -48,7 +48,7 @@ export default function TaskCard({ task, onToggleTask }) {
             </h1>
 
             <span
-              className={`text-sm border bg-slate-100/10 rounded-md capitalize ${priority_color}`}
+              className={`text-sm border px-1 bg-slate-100/10 rounded-md capitalize ${priority_color}`}
             >
               Priority: {task.priority}
             </span>
