@@ -54,7 +54,7 @@ export default function TaskCard({ task, onToggleTask }) {
             </span>
           </div>
           <div
-            className={` inline-flex flex-row gap-2 items-center px-2 border rounded-xl ${task.completed ? `border border-green-400` : `border border-slate-100/40`}  bg-slate-700 text-sm my-1`}
+            className={` inline-flex flex-row mb-2 gap-2 items-center px-2 border rounded-xl ${task.completed ? `border border-green-400` : `border border-slate-100/40`}  bg-slate-700 text-sm my-1`}
           >
             <span
               className={`inline-block h-2.5 w-2.5 rounded-full bg-slate-100/80`}
