@@ -50,7 +50,7 @@ export default function TaskCard({ task, onToggleTask }) {
             <span
               className={`text-sm border px-1 bg-slate-100/10 rounded-md capitalize ${priority_color}`}
             >
-              Priority: {task.priority}
+              {task.priority}
             </span>
           </div>
           <div
@@ -60,7 +60,7 @@ export default function TaskCard({ task, onToggleTask }) {
               className={`inline-block h-2.5 w-2.5 rounded-full bg-slate-100/80`}
             ></span>
             <p className={`${activity_color}`}>
-              {task.completed ? `Completed` : `Active`}
+              {task.completed ? `completed` : `active`}
             </p>
           </div>
 
