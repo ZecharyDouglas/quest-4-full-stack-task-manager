@@ -1,7 +1,12 @@
 import express from "express";
+import cors from "cors";
 import { starterTasks } from "./data.js";
 
 export const app = express();
+const cors_config = {
+  origin: "http://localhost:5173",
+};
+app.use(cors(cors_config));
 app.use(express.json());
 
 app.get("/tasks", (req, res) => {
@@ -72,5 +77,22 @@ app.patch("/tasks/:id", (req, res) => {
   res.status(200).json({
     message: "Resource sucessfully updated.",
     data: target,
+  });
+});
+
+app.delete("/tasks/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const locate_task = starterTasks.find((t) => t.id == id);
+  if (locate_task === undefined) {
+    return res.status(404).json({
+      error: "Resouce could not be found.",
+    });
+  }
+  //   console.log(starterTasks);
+  //   console.log(" BREAK ");
+  const index = starterTasks.indexOf((t) => t.id === id);
+  starterTasks.splice(index, 1);
+  return res.status(200).json({
+    message: "Resource successfully deleted.",
   });
 });

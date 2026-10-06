@@ -3,13 +3,22 @@ import TaskForm from "./components/TaskForm.jsx";
 import TaskList from "./components/TaskList.jsx";
 import TaskStats from "./components/TaskStats.jsx";
 import { starterTasks } from "./starterData.js";
+import { useEffect } from "react";
+import { getTasks } from "./services/taskApi.js";
 
 export default function App() {
   // TODO 1: Replace this temporary value with React state.
   // TODO 2: Write handleAddTask(taskData) without mutating the old array.
   // TODO 3: Later, write handleToggleTask(id)...
   //const tasks = starterTasks;
-  const [tasks, setTasks] = useState(starterTasks);
+
+  const [tasks, setTasks] = useState(undefined);
+  useEffect(() => {
+    (async () => {
+      const data = await getTasks();
+      setTasks(data);
+    })();
+  }, []);
   const handleAddTask = (t) => {
     setTasks((currentTasks) => {
       const id =
@@ -51,10 +60,18 @@ export default function App() {
             React owns the UI now. PostgreSQL is still sleeping.
           </p>
         </header>
-        <TaskStats tasks={tasks} />
+        {tasks ? <TaskStats tasks={tasks} /> : <p>Stats go here</p>}
         <section className="mt-8 grid gap-6 md:grid-cols-[.8fr_1.2fr]">
-          <TaskForm onAddTask={handleAddTask} />
-          <TaskList tasks={tasks} onToggleTask={handleToggleTask} />
+          {tasks ? (
+            <TaskForm onAddTask={handleAddTask} />
+          ) : (
+            <p>Form goes here</p>
+          )}
+          {tasks ? (
+            <TaskList tasks={tasks} onToggleTask={handleToggleTask} />
+          ) : (
+            <p>Stats go here</p>
+          )}
         </section>
       </div>
     </main>

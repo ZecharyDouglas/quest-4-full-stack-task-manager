@@ -83,7 +83,7 @@ describe("Quest 4B - Express API", () => {
   });
 
   // CHECKPOINT 4B.4
-  test.todo("DELETE /tasks/:id removes an existing task", async () => {
+  test("DELETE /tasks/:id removes an existing task", async () => {
     // Create our own task so this test doesn't destroy starter data.
     await request(app).post("/tasks").send({
       id: 99,
@@ -101,7 +101,7 @@ describe("Quest 4B - Express API", () => {
     expect(lookupResponse.status).toBe(404);
   });
 
-  test.todo("DELETE /tasks/:id returns 404 for an unknown task", async () => {
+  test("DELETE /tasks/:id returns 404 for an unknown task", async () => {
     const response = await request(app).delete("/tasks/999");
 
     expect(response.status).toBe(404);

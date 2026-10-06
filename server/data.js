@@ -1,14 +1,14 @@
 export let starterTasks = [
   {
     id: 1,
-    title: "Translate Quest 3 into React",
+    title: "The seed data cant be the same",
     priority: "urgent",
     completed: false,
   },
-  { id: 2, title: "Understand props", priority: "high", completed: false },
+  { id: 2, title: "Sent from the backend", priority: "high", completed: false },
   {
     id: 3,
-    title: "Stop manually puppeteering the DOM",
+    title: "Actual API results",
     priority: "medium",
     completed: true,
   },
