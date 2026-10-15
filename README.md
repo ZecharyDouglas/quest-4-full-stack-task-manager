@@ -129,7 +129,7 @@ DELETE
 validation/error cases
 
 4B.7 React ↔ Express
-↓
+↓.
 finish taskApi.js
 GET /tasks through fetch()
 loading/error state
