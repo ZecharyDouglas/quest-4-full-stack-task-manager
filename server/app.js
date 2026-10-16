@@ -7,6 +7,7 @@ const cors_config = {
   origin: "http://localhost:5173",
 };
 app.use(cors(cors_config));
+//
 app.use(express.json());
 
 app.get("/tasks", (req, res) => {
