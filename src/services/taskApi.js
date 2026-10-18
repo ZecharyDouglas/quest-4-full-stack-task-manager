@@ -9,3 +9,19 @@ export async function getTasks() {
   const task_data = await response.json();
   return task_data.data;
 }
+
+export async function deleteTask(id) {
+  const url = `http://localhost:3000/tasks/${id}`;
+  const response = await fetch(url, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    //Error doesnt concatenate so template literals are needed
+    throw new Error(`Failed to delete error code: ${response.status}`);
+  }
+  if (response.status === 204) {
+    return;
+  }
+  const data = await response.json();
+  return data;
+}
