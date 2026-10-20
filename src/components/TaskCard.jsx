@@ -1,4 +1,4 @@
-export default function TaskCard({ task, onToggleTask }) {
+export default function TaskCard({ task, onToggleTask, onDeleteTask }) {
   // TODO: render title, priority, and Completed/Active status.
   // Later: conditional styling and an onToggle prop.
   let priority_color;
@@ -72,7 +72,10 @@ export default function TaskCard({ task, onToggleTask }) {
               Complete
             </button>
 
-            <button className="px-1 border border-slate-500 rounded-lg cursor-pointer p-1 active:bg-red-500 active:text-slate-800 hover:bg-red-400 ">
+            <button
+              className="px-1 border border-slate-500 rounded-lg cursor-pointer p-1 active:bg-red-500 active:text-slate-800 hover:bg-red-400 "
+              onClick={() => onDeleteTask(task.id)}
+            >
               Delete
             </button>
           </div>

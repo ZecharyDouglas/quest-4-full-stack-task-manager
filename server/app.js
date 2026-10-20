@@ -83,16 +83,16 @@ app.patch("/tasks/:id", (req, res) => {
 
 app.delete("/tasks/:id", (req, res) => {
   const id = Number(req.params.id);
-  const locate_task = starterTasks.find((t) => t.id == id);
-  if (locate_task === undefined) {
+  const locate_task = starterTasks.findIndex((t) => t.id == id);
+  if (locate_task === -1) {
     return res.status(404).json({
       error: "Resouce could not be found.",
     });
   }
   //   console.log(starterTasks);
   //   console.log(" BREAK ");
-  const index = starterTasks.indexOf((t) => t.id === id);
-  starterTasks.splice(index, 1);
+  //.log(typeof id);
+  starterTasks.splice(locate_task, 1);
   return res.status(200).json({
     message: "Resource successfully deleted.",
   });

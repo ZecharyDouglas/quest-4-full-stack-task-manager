@@ -4,7 +4,7 @@ import TaskList from "./components/TaskList.jsx";
 import TaskStats from "./components/TaskStats.jsx";
 import { starterTasks } from "./starterData.js";
 import { useEffect } from "react";
-import { getTasks } from "./services/taskApi.js";
+import { deleteTask, getTasks } from "./services/taskApi.js";
 
 export default function App() {
   // TODO 1: Replace this temporary value with React state.
@@ -47,7 +47,8 @@ export default function App() {
       return toggle_updated;
     });
   };
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
+    const data = await deleteTask(id);
     setTasks((prev) => prev.filter((t) => t.id !== id));
   };
 
@@ -71,7 +72,11 @@ export default function App() {
             <p>Form goes here</p>
           )}
           {tasks ? (
-            <TaskList tasks={tasks} onToggleTask={handleToggleTask} />
+            <TaskList
+              tasks={tasks}
+              onToggleTask={handleToggleTask}
+              onDeleteTask={handleDelete}
+            />
           ) : (
             <p>Stats go here</p>
           )}
