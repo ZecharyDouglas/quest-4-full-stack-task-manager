@@ -33,23 +33,21 @@ app.get("/tasks/:id", (req, res) => {
 app.post("/tasks", (req, res) => {
   const new_task = req.body;
   if (
-    new_task.id &&
     new_task.title &&
     new_task.priority &&
     typeof new_task.completed === "boolean"
   ) {
-    const filtered_tasks = starterTasks.filter((t) => t.id === new_task.id);
-    if (filtered_tasks.length > 0) {
-      return res.status(409).json({
-        error: "Duplicate task detected",
-      });
-    } else {
-      starterTasks.push(new_task);
-      res.status(201).json({
-        message: "Task posted successfully.",
-        data: new_task,
-      });
-    }
+    const id =
+      starterTasks.length == 0
+        ? 1
+        : Math.max(...starterTasks.map((t) => t.id)) + 1;
+    const modified_task = { ...new_task, id };
+    console.log(modified_task);
+    starterTasks.push(modified_task);
+    res.status(201).json({
+      message: "Task posted successfully.",
+      data: modified_task,
+    });
   } else {
     res.status(400).json({
       error: "Invalid task object.",
