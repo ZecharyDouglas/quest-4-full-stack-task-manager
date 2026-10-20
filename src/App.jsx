@@ -47,6 +47,9 @@ export default function App() {
       return toggle_updated;
     });
   };
+  const handleDelete = (id) => {
+    setTasks((prev) => prev.filter((t) => t.id !== id));
+  };
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">

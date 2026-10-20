@@ -64,12 +64,16 @@ export default function TaskCard({ task, onToggleTask }) {
             </p>
           </div>
 
-          <div className=" flex my-2">
+          <div className=" flex my-2 justify-between">
             <button
               className=" border border-slate-500 rounded-lg cursor-pointer p-1 active:bg-slate-500 active:text-slate-800 hover:bg-slate-700"
               onClick={() => onToggleTask(task.id)}
             >
               Complete
+            </button>
+
+            <button className="px-1 border border-slate-500 rounded-lg cursor-pointer p-1 active:bg-red-500 active:text-slate-800 hover:bg-red-400 ">
+              Delete
             </button>
           </div>
         </>
