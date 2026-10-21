@@ -4,7 +4,12 @@ import TaskList from "./components/TaskList.jsx";
 import TaskStats from "./components/TaskStats.jsx";
 import { starterTasks } from "./starterData.js";
 import { useEffect } from "react";
-import { deleteTask, getTasks, postTask } from "./services/taskApi.js";
+import {
+  deleteTask,
+  getTasks,
+  patchTask,
+  postTask,
+} from "./services/taskApi.js";
 
 export default function App() {
   // TODO 1: Replace this temporary value with React state.
@@ -25,22 +30,11 @@ export default function App() {
       return [...currentTasks, new_task];
     });
   };
-  const handleToggleTask = (id) => {
-    setTasks((prev) => {
-      const toggle_updated = [
-        ...prev.map((t) => {
-          if (t.id === id) {
-            return {
-              ...t,
-              completed: !t.completed,
-            };
-          }
-          return t;
-        }),
-      ];
-      //console.log(toggle_updated);
-      return toggle_updated;
-    });
+  const handleToggleTask = async (id) => {
+    const completed_field = !tasks.find((t) => t.id === id).completed;
+    const task_updated = await patchTask(id, completed_field);
+
+    setTasks((prev) => prev.map((t) => (t.id === id ? task_updated : t)));
   };
   const handleDelete = async (id) => {
     const data = await deleteTask(id);

@@ -42,3 +42,22 @@ export async function postTask(task) {
   console.log(data);
   return data.data;
 }
+
+export async function patchTask(id, field) {
+  const url = `http://localhost:3000/tasks/${id}`;
+  const response = await fetch(url, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      completed: field,
+    }),
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to patch task: ${response.status}`);
+  }
+  const task = await response.json();
+  console.log(task);
+  return task.data;
+}
