@@ -57,6 +57,6 @@ export async function patchTask(id, field) {
     throw new Error(`Failed to patch task: ${response.status}`);
   }
   const task = await response.json();
-  console.log(task);
+  //console.log(task);
   return task.data;
 }
