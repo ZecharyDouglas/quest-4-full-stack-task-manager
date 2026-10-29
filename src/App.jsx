@@ -25,20 +25,32 @@ export default function App() {
     })();
   }, []);
   const handleAddTask = async (t) => {
-    const new_task = await postTask(t);
-    setTasks((currentTasks) => {
-      return [...currentTasks, new_task];
-    });
+    try {
+      const new_task = await postTask(t);
+      setTasks((currentTasks) => {
+        return [...currentTasks, new_task];
+      });
+    } catch (error) {
+      console.log(`Failed to add task: ${error.message}`);
+    }
   };
   const handleToggleTask = async (id) => {
-    const completed_field = !tasks.find((t) => t.id === id).completed;
-    const task_updated = await patchTask(id, completed_field);
-
-    setTasks((prev) => prev.map((t) => (t.id === id ? task_updated : t)));
+    try {
+      const completed_field = !tasks.find((t) => t.id === id).completed;
+      const task_updated = await patchTask(id, completed_field);
+      setTasks((prev) => prev.map((t) => (t.id === id ? task_updated : t)));
+    } catch (error) {
+      console.log(`Failed to update task: ${error.message}`);
+    }
   };
   const handleDelete = async (id) => {
-    const data = await deleteTask(id);
-    setTasks((prev) => prev.filter((t) => t.id !== id));
+    try {
+      await deleteTask(id);
+      setTasks((prev) => prev.filter((t) => t.id !== id));
+      alert("Task sucessfully deleted.");
+    } catch (error) {
+      alert(`Error: ${error.message}`);
+    }
   };
 
   return (

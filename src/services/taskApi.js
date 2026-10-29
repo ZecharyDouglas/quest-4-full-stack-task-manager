@@ -17,13 +17,12 @@ export async function deleteTask(id) {
   });
   if (!response.ok) {
     //Error doesnt concatenate so template literals are needed
+    console.log(response.status);
     throw new Error(`Failed to delete error code: ${response.status}`);
   }
   if (response.status === 204) {
     return;
   }
-  const data = await response.json();
-  return data;
 }
 
 export async function postTask(task) {
@@ -39,7 +38,7 @@ export async function postTask(task) {
     throw new Error(`Failed to post task: ${response.status}`);
   }
   const data = await response.json();
-  console.log(data);
+  //console.log(data);
   return data.data;
 }
 

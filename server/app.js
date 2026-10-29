@@ -64,20 +64,39 @@ app.patch("/tasks/:id", (req, res) => {
       error: "Resource does not exist.",
     });
   }
-
-  if (req.body.priority) {
-    target.priority = req.body.priority;
+  // front end validation should prevent invalid inputs, as well but since there are different ways of making api requests
+  //should partial updates be possibe or should the operation be atomic
+  try {
+    const updates = {};
+    if (req.body.priority !== undefined) {
+      if (typeof req.body.priority === "string" && req.body.priority.length > 0)
+        updates.priority = req.body.priority;
+      else {
+        throw new Error("Invalid priority provided.");
+      }
+    }
+    if (req.body.title !== undefined) {
+      if (typeof req.body.title === "string" && req.body.title.length > 0)
+        updates.title = req.body.title;
+      else {
+        throw new Error("Invalid title provided.");
+      }
+    }
+    if (req.body.completed !== undefined) {
+      if (typeof req.body.completed === "boolean")
+        updates.completed = req.body.completed;
+      else throw new Error("Invalid completion state.");
+    }
+    Object.assign(target, updates);
+    res.status(200).json({
+      message: "Resource sucessfully updated.",
+      data: target,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      error: `Invalid patch request: ${error}`,
+    });
   }
-  if (req.body.title) {
-    target.title = req.body.title;
-  }
-  if (req.body?.completed !== undefined) {
-    target.completed = req.body.completed;
-  }
-  res.status(200).json({
-    message: "Resource sucessfully updated.",
-    data: target,
-  });
 });
 
 app.delete("/tasks/:id", (req, res) => {
@@ -92,7 +111,7 @@ app.delete("/tasks/:id", (req, res) => {
   //   console.log(" BREAK ");
   //.log(typeof id);
   starterTasks.splice(locate_task, 1);
-  return res.status(200).json({
+  return res.status(204).json({
     message: "Resource successfully deleted.",
   });
 });
