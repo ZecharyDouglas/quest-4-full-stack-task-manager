@@ -6,6 +6,7 @@ export const app = express();
 const cors_config = {
   origin: "http://localhost:5173",
 };
+const CATEGORIES = ["frontend", "backend", "dsa", "testing", "career"];
 app.use(cors(cors_config));
 ///
 app.use(express.json());
@@ -35,6 +36,7 @@ app.post("/tasks", (req, res) => {
   if (
     new_task.title &&
     new_task.priority &&
+    new_task.category &&
     typeof new_task.completed === "boolean"
   ) {
     const id =
@@ -80,6 +82,13 @@ app.patch("/tasks/:id", (req, res) => {
         updates.title = req.body.title;
       else {
         throw new Error("Invalid title provided.");
+      }
+    }
+    if (req.body.category !== undefined) {
+      if (typeof req.body.category === "string" && req.body.category.length > 0)
+        updates.category = req.body.category;
+      else {
+        throw new Error("Invalid Category provided.");
       }
     }
     if (req.body.completed !== undefined) {

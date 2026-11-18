@@ -5,17 +5,20 @@ export default function TaskForm({ onAddTask }) {
   // Do NOT use document.getElementById/querySelector.
   const [taskTitle, setTaskTitle] = useState("");
   const [taskPriority, setTaskPriority] = useState("medium");
+  const [taskCategory, setTaskCategory] = useState("dsa");
   const [taskCompleted, setTaskCompleted] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     const taskObject = {
       title: taskTitle,
       priority: taskPriority,
+      category: taskCategory,
       completed: taskCompleted,
     };
     onAddTask(taskObject);
     setTaskTitle("");
-    setTaskPriority("medium");
+    setTaskPriority("");
+    setTaskCategory("");
     setTaskCompleted(false);
   };
 
@@ -34,10 +37,11 @@ export default function TaskForm({ onAddTask }) {
         }}
         className=" border border-white rounded-lg my-2"
       />
-      <div>
+      <div className="flex justify-between">
         <select
           name="Task Priorities"
           id=""
+          placeholder="Priority Level"
           value={taskPriority}
           onChange={(e) => {
             setTaskPriority(e.target.value);
@@ -48,14 +52,29 @@ export default function TaskForm({ onAddTask }) {
           <option value="high">High</option>
           <option value="urgent">Urgent</option>
         </select>
-        <div>
-          <button
-            className="flex flex-row bg-green p-2 border border-white rounded-lg"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
+        <select
+          name="Task Categories"
+          id=""
+          placeholder="Category"
+          value={taskCategory}
+          onChange={(e) => {
+            setTaskCategory(e.target.value);
+          }}
+        >
+          <option value="frontend">frontend</option>
+          <option value="backend">backend</option>
+          <option value="dsa">dsa</option>
+          <option value="testing">testing</option>
+          <option value="career">career</option>
+        </select>
+      </div>
+      <div>
+        <button
+          className="flex flex-row bg-green p-2 border border-white rounded-lg"
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
       </div>
     </form>
   );
