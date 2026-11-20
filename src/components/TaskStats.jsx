@@ -11,11 +11,30 @@ export default function TaskStats({ tasks }) {
   });
 
   return (
-    <section className="grid grid-cols-3 gap-3" aria-label="Task statistics">
-      <Stat label="Total" value={total} />
-      <Stat label="Completed" value={completed} />
-      <Stat label="Active" value={active} />
-    </section>
+    <>
+      <section className="grid grid-cols-3 gap-3" aria-label="Task statistics">
+        <Stat label="Total" value={total} />
+        <Stat label="Completed" value={completed} />
+        <Stat label="Active" value={active} />
+      </section>
+      <section className=" flex flex-row mt-3">
+        <button className="rounded-lg border border-slate-800 bg-red-400 p-4">
+          frontend
+        </button>
+        <button className="rounded-lg border border-slate-800 bg-cyan-300 p-4">
+          backend
+        </button>
+        <button className="rounded-lg border border-slate-800 bg-blue-400 p-4">
+          dsa
+        </button>
+        <button className="rounded-lg border border-slate-800 bg-purple-300 p-4">
+          testing
+        </button>
+        <button className="rounded-lg border border-slate-800 bg-orange-300 p-4">
+          career
+        </button>
+      </section>
+    </>
   );
 }
 function Stat({ label, value }) {

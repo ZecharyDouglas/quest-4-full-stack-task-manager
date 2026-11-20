@@ -17,8 +17,8 @@ export default function TaskForm({ onAddTask }) {
     };
     onAddTask(taskObject);
     setTaskTitle("");
-    setTaskPriority("");
-    setTaskCategory("");
+    setTaskPriority("medium");
+    setTaskCategory("dsa");
     setTaskCompleted(false);
   };
 

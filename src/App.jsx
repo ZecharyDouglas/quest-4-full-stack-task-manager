@@ -52,6 +52,8 @@ export default function App() {
       alert(`Error: ${error.message}`);
     }
   };
+  //write a toggle category function and pass it into taskStats (bar chart buttons)
+  //pass selected category into task prop
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">

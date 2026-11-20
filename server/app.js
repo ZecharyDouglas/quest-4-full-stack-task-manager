@@ -37,6 +37,7 @@ app.post("/tasks", (req, res) => {
     new_task.title &&
     new_task.priority &&
     new_task.category &&
+    CATEGORIES.includes(new_task.category) &&
     typeof new_task.completed === "boolean"
   ) {
     const id =
