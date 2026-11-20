@@ -52,7 +52,6 @@ export default function App() {
       alert(`Error: ${error.message}`);
     }
   };
-  //write a toggle category function and pass it into taskStats (bar chart buttons)
   //pass selected category into task prop
 
   return (
