@@ -31,6 +31,27 @@ export default function TaskCard({ task, onToggleTask, onDeleteTask }) {
     default:
       break;
   }
+  let category_color;
+  switch (task.category) {
+    case "frontend":
+      category_color = "text-red-400";
+      break;
+    case "backend":
+      category_color = `text-cyan-300`;
+      break;
+    case "dsa":
+      category_color = `text-blue-400`;
+      break;
+    case "testing":
+      category_color = `text-purple-300`;
+      break;
+    case "career":
+      category_color = `text-orange-300`;
+      break;
+
+    default:
+      break;
+  }
 
   return (
     <article
@@ -53,15 +74,22 @@ export default function TaskCard({ task, onToggleTask, onDeleteTask }) {
               {task.priority}
             </span>
           </div>
-          <div
-            className={` inline-flex flex-row mb-2 gap-2 items-center px-2 border rounded-xl ${task.completed ? `border border-green-400` : `border border-slate-100/40`}  bg-slate-700 text-sm my-1`}
-          >
-            <span
-              className={`inline-block h-2.5 w-2.5 rounded-full bg-slate-100/80`}
-            ></span>
-            <p className={`${activity_color}`}>
-              {task.completed ? `completed` : `active`}
-            </p>
+          <div className="flex justify-between">
+            <div
+              className={` inline-flex flex-row mb-2 gap-2 items-center px-2 border rounded-xl ${task.completed ? `border border-green-400` : `border border-slate-100/40`}  bg-slate-700 text-sm my-1`}
+            >
+              <span
+                className={`inline-block h-2.5 w-2.5 rounded-full bg-slate-100/80`}
+              ></span>
+              <p className={`${activity_color}`}>
+                {task.completed ? `completed` : `active`}
+              </p>
+            </div>
+            <div
+              className={` inline-flex flex-row mb-2 gap-2 items-center px-2 border rounded-md ${`border border-slate-100/40`}  bg-slate-700 text-sm my-1`}
+            >
+              <p className={`${category_color}`}>{task.category}</p>
+            </div>
           </div>
 
           <div className=" flex my-2 justify-between">

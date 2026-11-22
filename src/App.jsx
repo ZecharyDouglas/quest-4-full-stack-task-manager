@@ -17,7 +17,8 @@ export default function App() {
   // TODO 3: Later, write handleToggleTask(id)...
   //const tasks = starterTasks;
 
-  const [tasks, setTasks] = useState(undefined);
+  const [tasks, setTasks] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   useEffect(() => {
     (async () => {
       const data = await getTasks();
@@ -54,6 +55,14 @@ export default function App() {
   };
   //pass selected category into task prop
 
+  const handleFilterByCategory = (category) => {
+    setSelectedCategory((prev) => (prev === category ? null : category));
+  };
+
+  const visibleTasks = selectedCategory
+    ? tasks.filter((t) => t.category === selectedCategory)
+    : tasks;
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl p-6 md:p-10">
@@ -66,7 +75,11 @@ export default function App() {
             React owns the UI now. PostgreSQL is still sleeping.
           </p>
         </header>
-        {tasks ? <TaskStats tasks={tasks} /> : <p>Stats go here</p>}
+        {tasks ? (
+          <TaskStats onSelectCategory={handleFilterByCategory} tasks={tasks} />
+        ) : (
+          <p>Stats go here</p>
+        )}
         <section className="mt-8 grid gap-6 md:grid-cols-[.8fr_1.2fr]">
           {tasks ? (
             <TaskForm onAddTask={handleAddTask} />
@@ -75,7 +88,7 @@ export default function App() {
           )}
           {tasks ? (
             <TaskList
-              tasks={tasks}
+              tasks={visibleTasks}
               onToggleTask={handleToggleTask}
               onDeleteTask={handleDelete}
             />

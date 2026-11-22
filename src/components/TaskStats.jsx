@@ -1,4 +1,4 @@
-export default function TaskStats({ tasks }) {
+export default function TaskStats({ tasks, onSelectCategory }) {
   // TODO: derive total, completed, active from tasks. Do not store derived values in state.
   let total = 0,
     completed = 0,
@@ -37,30 +37,35 @@ export default function TaskStats({ tasks }) {
         <button
           style={{ flexGrow: category_count.frontend }}
           className="rounded-lg basis-0 border border-slate-800 bg-red-400 p-4"
+          onClick={() => onSelectCategory("frontend")}
         >
           frontend
         </button>
         <button
           style={{ flexGrow: category_count.backend }}
           className="rounded-lg basis-0  border border-slate-800 bg-cyan-300 p-4"
+          onClick={() => onSelectCategory("backend")}
         >
           backend
         </button>
         <button
           style={{ flexGrow: category_count.dsa }}
           className="rounded-lg basis-0  border border-slate-800 bg-blue-400 p-4"
+          onClick={() => onSelectCategory("dsa")}
         >
           dsa
         </button>
         <button
           style={{ flexGrow: category_count.testing }}
           className="rounded-lg basis-0  border border-slate-800 bg-purple-300 p-4"
+          onClick={() => onSelectCategory("testing")}
         >
           testing
         </button>
         <button
           style={{ flexGrow: category_count.career }}
           className="rounded-lg basis-0  border border-slate-800 bg-orange-300 p-4"
+          onClick={() => onSelectCategory("career")}
         >
           career
         </button>
