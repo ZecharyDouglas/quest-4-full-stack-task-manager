@@ -25,7 +25,7 @@ export default function TaskStats({ tasks, onSelectCategory }) {
       testing: 0,
       career: 0,
     },
-  ); //
+  ); ////
   return (
     <>
       <section className="grid grid-cols-3 gap-3" aria-label="Task statistics">
